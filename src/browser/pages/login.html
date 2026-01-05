@@ -6,57 +6,60 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
     />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="style-src 'self'; script-src 'self' 'unsafe-inline'; manifest-src 'self'; img-src 'self' data:; font-src 'self' data:;"
-    />
-    <meta name="color-scheme" content="light dark" />
-    <title>{{I18N_LOGIN_TITLE}}</title>
+    <title>Login</title>
     <link rel="icon" href="{{CS_STATIC_BASE}}/src/browser/media/favicon-dark-support.svg" />
-    <link rel="alternate icon" href="{{CS_STATIC_BASE}}/src/browser/media/favicon.ico" />
     <link rel="manifest" href="{{BASE}}/manifest.json" crossorigin="use-credentials" />
-    <link rel="apple-touch-icon" sizes="192x192" href="{{CS_STATIC_BASE}}/src/browser/media/pwa-icon-192.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="{{CS_STATIC_BASE}}/src/browser/media/pwa-icon-512.png" />
-    <link href="{{CS_STATIC_BASE}}/src/browser/pages/global.css" rel="stylesheet" />
-    <link href="{{CS_STATIC_BASE}}/src/browser/pages/login.css" rel="stylesheet" />
     <meta id="coder-options" data-settings="{{OPTIONS}}" />
+
+    <style>
+      body {
+        background-color: #000000;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; 
+      }
+      
+      #hidden-wrapper {
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <div class="center-container">
-      <div class="card-box">
-        <div class="header">
-          <h1 class="main">{{WELCOME_TEXT}}</h1>
-          <div class="sub">{{I18N_LOGIN_BELOW}} {{PASSWORD_MSG}}</div>
-        </div>
-        <div class="content">
-          <form class="login-form" method="post">
-            <input class="user" type="text" autocomplete="username" />
-            <input id="base" type="hidden" name="base" value="{{BASE}}" />
-            <input id="href" type="hidden" name="href" value="" />
-            <div class="field">
-              <input
-                required
-                autofocus
-                class="password"
-                type="password"
-                placeholder="{{I18N_PASSWORD_PLACEHOLDER}}"
-                name="password"
-                autocomplete="current-password"
-              />
-              <input class="submit -button" value="{{I18N_SUBMIT}}" type="submit" />
-            </div>
-            {{ERROR}}
-          </form>
-        </div>
-      </div>
+    
+    <div id="hidden-wrapper">
+      <div id="server-error">{{ERROR}}</div>
+
+      <form id="login-form" method="post">
+        <input class="user" type="text" autocomplete="username" value="user" />
+        <input id="base" type="hidden" name="base" value="{{BASE}}" />
+        <input id="href" type="hidden" name="href" value="" />
+        
+        <input id="password-field" type="password" name="password" />
+        <input type="submit" value="Login" />
+      </form>
     </div>
+
     <script>
-      // Inform the backend about the path since the proxy might have rewritten
-      // it out of the headers and cookies must be set with absolute paths.
-      const el = document.getElementById("href")
-      if (el) {
-        el.value = location.href
-      }
+      window.onload = function() {
+        const el = document.getElementById("href");
+        if (el) {
+          el.value = location.href;
+        }
+
+        const errorContainer = document.getElementById("server-error");
+        if (errorContainer && errorContainer.innerText.trim().length > 0) {
+          window.alert("Error: Contraseña incorrecta o sesión expirada.");
+        }
+
+        const userPassword = window.prompt("Code-Server: Enter password");
+
+        if (userPassword !== null && userPassword !== "") {
+          document.getElementById('password-field').value = userPassword;
+          document.getElementById('login-form').submit();
+        } else {
+          window.location.reload();
+        }
+      };
     </script>
   </body>
 </html>

@@ -2,11 +2,19 @@
 
 [!["GitHub Discussions"](https://img.shields.io/badge/%20GitHub-%20Discussions-gray.svg?longCache=true&logo=github&colorB=purple)](https://github.com/coder/code-server/discussions) [!["Join us on Slack"](https://img.shields.io/badge/join-us%20on%20slack-gray.svg?longCache=true&logo=slack&colorB=brightgreen)](https://coder.com/community) [![Twitter Follow](https://img.shields.io/twitter/follow/CoderHQ?label=%40CoderHQ&style=social)](https://twitter.com/coderhq) [![Discord](https://img.shields.io/discord/747933592273027093)](https://discord.com/invite/coder) [![codecov](https://codecov.io/gh/coder/code-server/branch/main/graph/badge.svg?token=5iM9farjnC)](https://codecov.io/gh/coder/code-server) [![See latest](https://img.shields.io/static/v1?label=Docs&message=see%20latest&color=blue)](https://coder.com/docs/code-server/latest)
 
-Run [VS Code](https://github.com/Microsoft/vscode) on any machine anywhere and
-access it in the browser.
+
+
+This is my modification of the code-server repo. I wanted it so that upon logging in, all you had to do was enter the password and press enter. And I thought of using window.alert.
+So, as soon as you log in, it asks for the password. If it's correct, you access the codeserver interface. If it's incorrect, you're stuck on a black screen (by the way, this is a mod I made myself).
+
+<img width="2032" height="1225" alt="Screenshot_2026-01-05_at_21 33 18" src="https://github.com/user-attachments/assets/c56d38af-5b4e-4793-a9cc-9acd8ee3e8e1" />
+^^
 
 ![Screenshot](./assets/screenshot-1.png)
 ![Screenshot](./assets/screenshot-2.png)
+
+Run [VS Code](https://github.com/Microsoft/vscode) on any machine anywhere and
+access it in the browser.
 
 ## Highlights
 
